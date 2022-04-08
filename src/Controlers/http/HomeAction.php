@@ -1,5 +1,5 @@
 <?php
-namespace Hillel\COntrolers\http;
+namespace Hillel\Controlers\http;
 
 class HomeAction
 {
