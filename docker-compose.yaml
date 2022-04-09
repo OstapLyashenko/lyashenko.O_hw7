@@ -1,37 +1,13 @@
 version: "3"
 services:
-  app:
-    build: .
-    depends_on:
-      - mysql
+  server:
+    image: php:8.0.2-apache
     ports:
-      - "80:80"
+      - 80:80
     volumes:
-      - .:/src/app
-    networks:
-      - abc
-  mysql:
-    image: "mysql:5.7.28"
-    ports:
-      - "13306:3306"
-    environment:
-      - MYSQL_DATABASE=sandbox
-      - MYSQL_ROOT_PASSWORD=secret
-    networks:
-      - abc
-  phpmyadmin:
-    image: phpmyadmin:5.0.4
-    ports:
-      - "8080:80"
-    environment:
-      - PMA_HOST=mysql
-    networks:
-      - abc
+      - .:/var/www/html
 
-volumes:
-  volumes1:
-  volumes2:
-
-networks:
-  abc:
-    driver: bridge
+  composer:
+    image: composer:2.3
+    volumes:
+      - .:/app
