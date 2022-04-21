@@ -2,8 +2,6 @@
 
 namespace Hillel\ValueObjects;
 
-use mysql_xdevapi\Exception;
-
 class Money
 {
     private int|float $amount;
@@ -23,7 +21,7 @@ class Money
     public function setAmount(float|int $amount): void
     {
         if ($amount <= 0){
-         throw new Exception('Invalid amount');
+         throw new \Exception('Invalid amount');
         }
         $this->amount = $amount;
     }
@@ -42,9 +40,8 @@ class Money
      return  $this == $money;
     }
     public function add(Money $money): Money{
-        if ($this->currency != $money->currency){
+        if ($this->currency != $money->currency)
             throw new \Exception('Different currencies');
-        }
         return new Money($this->getAmount() + $money->getAmount(), $this->getCurrency());
     }
 }
